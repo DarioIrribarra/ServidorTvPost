@@ -1,0 +1,42 @@
+1.- Crear un script en bash que obtenga la resolución de pantalla y la guarde en un archivo 
+. Lo leo con Python y guardo los valores en variables al abrir el programa
+
+2.- obtener los datos fullscreen de la pantalla actual, guardarlos en 
+una variable y procesarlos para hacer el cálculo y dividir la pantalla
+
+3.- Crear un script en python que transforme de pixels a milimeters para
+asignar valores a xrandr
+
+4.- Crear un archivo en python que ejecute el bash y desde ahí manejarlo
+para que abra aplicaciones en las pantallas. Este debe tener interfaz 
+gráfica e identificar cuando se hayan creado los layouts necesarios
+
+5.- Tratar de seleccionar el display a través de la aplicación y abrir
+los ejecutables en ese display específoc (para el streaming o las 
+imágenes). Quizás al darle el posicionamiento de ventana con coordenadas
+funcione. La aplicación tiene que abrirse al iniciar la Raspberry y 
+ocultar el menú de inicio para que solo se pueda acceder vía la app del
+celu o a través de un comando especial que desbloquee el teclaod y mouse
+
+6.- Acá la aplicación debe tener una forma de recibir un archivo que se 
+le envíe e identificar que si es un link, se abra con firefox, un video
+con vlc, una imagen con el visor y así. Pero dependiendo de que parte 
+del layout ellos lo quieran colocar.
+
+7.- Se debe desarrollar una especie de socket entre la raspberry y una 
+app en android que sea capaz de enviar un objeto y que la app lo reciba
+y lo despliegue en el layout que se quiera.
+
+8.- La app del celular tiene que enviar, a la app en la Raspberry, el 
+objeto y el lugar del layout en que quiere dejarlo. 
+
+9.- Primero la app debe conectarse con la Raspberry. Después tiene que 
+mostrar los layouts disponibles y hacer que el usuario escoja uno. 
+Después el usuario tiene que escoger qué va en cada trozo de layout. 
+Cuando se haya elegido cada uno se envía con un botón a la app. Acá se 
+recibe y se procesa en full screen cada parte del layout.
+
+10.- Tiene que ser posible cambiar solo alguna parte del layout, es 
+decir que si un video está corriendo, al cambiar la imagen a la derecha
+no se detenga. Hay que pensar que información o cómo enviársela a la app
+de la Rpasberry para que sepa qué cambiar y cual dejar estática. 

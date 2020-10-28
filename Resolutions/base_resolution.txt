@@ -1,0 +1,7 @@
+--RESOLUTION VALUES--
+Total=Monitors: 1 0: +*HDMI-1 1360/1600x768/900
+Width in pixels:-1360
+Width in milimeters:-1600
+Height in pixels:-768
+Height in milimeters:-900
+Adapter value:-HDMI-1

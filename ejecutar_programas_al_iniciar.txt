@@ -1,0 +1,12 @@
+Para ejecutar programas se debe editar el siguiente documento:
+
+/home/pi/.config/lxsession/LXDE-pi/autostart
+
+Acá se ponen las rutas acompañadas de un "@" del script o programa:
+Ejemplo:
+
+*Si se quiere abrir un programa se debe añadir la línea
+@programa_a_abrir [comandos opcionales]
+
+*Si se quiere abrir un script sh:
+@/bin/bash [dirección_del_script.sh]
