@@ -146,7 +146,7 @@ function kill_app_left_corner() {
 		#sudo rm ~/TvPost/Resolutions/window_id.txt
 		#echo $(cat /home/pi/window_id_temp.txt);
 		sudo mv ~/TvPost/Resolutions/window_id_temp.txt ~/TvPost/Resolutions/window_id.txt;
-		return 1;
+		return;
 	fi 
 }
 
@@ -161,7 +161,7 @@ function kill_app_right_corner() {
 		#sudo rm ~/TvPost/Resolutions/window_id.txt
 		#echo $(cat /home/pi/window_id_temp.txt);
 		sudo mv ~/TvPost/Resolutions/window_id_temp.txt ~/TvPost/Resolutions/window_id.txt;
-		return 1;
+		return;
 	fi 
 }
 
@@ -175,117 +175,10 @@ function kill_app_bottom_corner() {
 		sudo grep -rv '3:' ~/TvPost/Resolutions/window_id.txt >> ~/TvPost/Resolutions/window_id_temp.txt;
 		#sudo rm ~/TvPost/Resolutions/window_id.txt
 		sudo mv ~/TvPost/Resolutions/window_id_temp.txt ~/TvPost/Resolutions/window_id.txt;
-		return 1;
+		return;
 	fi 
 }
 
-
-#~ function left_screen() {
-	
-	#~ #Kill app in the left corner
-	#~ kill_app_left_corner;
-	
-	#~ #If matches an image open with image viewer
-	#~ if [[ $file_in_screen_1 =~ $regex_image_nopng ]]; then
-		#~ #Open with image viewer
-		#~ #Sleep to get activewindow as the image and then the keys
-		#~ #Mousemove and click to select the screen that runs the app
-		#~ #xdotool mousemove --sync 0 0 
-		#~ #xdotool click 1 
-		#~ #runs the app
-		#~ viewnior $file_in_screen_1 &
-		
-		#~ #Check fore new apps
-		#~ check_if_new_app_opened 
-		
-		#~ #sleep 1
-		#~ active_window_1=$(xdotool getactivewindow) 
-		#~ #echo "$active_window_1"
-		#~ xdotool windowmove --sync $active_window_1 0 0 
-		#~ sleep 1
-		
-		#~ #xdotool getactivewindow key f
-		#~ xdotool getactivewindow key F11 
-		#~ #Writing the id to later kill it
-		#~ echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-		
-	#~ else
-	
-		#~ if	[[ $file_in_screen_1 =~ $regex_local_video ]]; then
-			
-			#~ #xdotool mousemove --sync 0 0
-			#~ #xdotool click 1
-			#~ #runs the app
-			#~ vlc $file_in_screen_1 &
-			
-			#~ #Check fore new apps
-			#~ check_if_new_app_opened 
-			
-			#~ #sleep 4
-			#~ active_window_1=$(xdotool getactivewindow) 
-			
-			#~ xdotool windowmove --sync $active_window_1 0 0
-			#~ #Wait 1.5 seconds and then goes fullscreen
-			#~ sleep 1.5
-			#~ xdotool mousemove --sync 100 200
-			
-			#~ #Goes fullscreen here
-			#~ xdotool click 3
-			#~ xdotool getactivewindow key v
-			#~ xdotool getactivewindow key P
-			#~ xdotool getactivewindow key KP_Enter
-			
-			#~ #Writing the id to later kill it
-			#~ echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-			
-		#~ else
-			#~ #If it matches a youtube link, open and play in full screen
-			#~ if [[ $file_in_screen_1 =~ $regex_youtube ]]; then
-				#~ #sleep 10;
-				#~ #Opening and moving Chrome. Waiting 7 seconds and go fullscreen
-				#~ bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-
-				#~ check_if_new_app_opened;
-				
-				#~ sleep 20;
-				
-				#~ active_window_1=$(xdotool getactivewindow)
-				
-				#~ xdotool windowmove --sync $active_window_1 0 0
-				#~ echo 'la moví a la esquina izquierda '
-				
-				#~ xdotool key --window $active_window_1 f
-				
-				#~ echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-			#~ else
-				#~ #If it matches a url open with firefox
-				#~ if [[ $file_in_screen_1 =~ $regex_url_http_https ]] || [[ $file_in_screen_1 =~ $regex_url_www ]]; then
-					#~ #xdotool mousemove --sync 0 0
-					#~ #xdotool click 1
-					#~ #runs the app
-					#~ #Opening and moving firefox
-					#~ bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-					
-					#~ #Check fore new apps
-					#~ check_if_new_app_opened 
-					
-					#~ #sleep 10
-					#~ active_window_1=$(xdotool getactivewindow)
-					#~ xdotool windowmove --sync $active_window_1 0 0 &
-					#~ #sleep 8
-					#~ #xdotool key --window $active_window_1 F11 &
-					#~ #Writing the id to later kill it
-					#~ echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-					
-				#~ else
-					#~ echo "Archivo no reproducible"
-				#~ fi
-			#~ fi
-		
-		#~ fi
-
-	#~ fi
-#~ }
 
 function left_screen() {
 	
@@ -294,119 +187,10 @@ function left_screen() {
 	
 	sleep 3;
 	
-	#If matches gif, jpg or jpeg open with viewnior
-	if [[ $file_in_screen_1 =~ $regex_image_nopng ]]
-	then
-		
-		#runs the app
-		viewnior $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 1
-		active_window_1=$(xdotool getactivewindow) 
-		#echo "$active_window_1"
-		xdotool windowmove --sync $active_window_1 0 0 
-		#sleep 1
-		
-		xdotool getactivewindow key F11 
-		#Writing the id to later kill it
-		echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
+	#Sends info file to file opener
+	bash ~/TvPost/Bash_files/left_portion_file.sh ${file_in_screen_1};
+	return;
 	
-	#If matches an png open with image viewer
-	if [[ $file_in_screen_1 =~ $regex_image_png ]]
-	then
-		
-		#runs the app
-		gpicview $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 1
-		active_window_1=$(xdotool getactivewindow) 
-		#echo "$active_window_1"
-		xdotool windowmove --sync $active_window_1 0 0 
-		#sleep 1
-		
-		xdotool getactivewindow key F11 
-		#Writing the id to later kill it
-		echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-
-	#If it matches a video open with vlc
-	if	[[ $file_in_screen_1 =~ $regex_local_video ]]
-	then
-
-		#runs the app
-		cvlc -A alsa,none --alsa-audio-device default --repeat $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 4
-		active_window_1=$(xdotool getactivewindow) 
-		
-		xdotool windowmove --sync $active_window_1 0 0
-		#Wait 1.5 seconds and then goes fullscreen
-		#sleep 1.5
-		xdotool mousemove --sync 100 200
-		
-		#Goes fullscreen here
-		sleep 1.5
-		xdotool getactivewindow key f
-		
-		#Writing the id to later kill it
-		echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-	
-	#If it matches a youtube link, open and play in full screen
-	if [[ $file_in_screen_1 =~ $regex_youtube ]]
-	then
-
-		#Opening and moving Chrome. Waiting 7 seconds and go fullscreen
-		bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-
-		check_if_new_app_opened;
-		
-		active_window_1=$(xdotool getactivewindow)
-		
-		sleep 15;
-		
-		xdotool windowmove --sync $active_window_1 0 0
-		echo 'la moví a la esquina izquierda '
-		
-		xdotool key --window $active_window_1 f
-		
-		echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-
-	#If it matches a url open with chromium
-	if [[ $file_in_screen_1 =~ $regex_url_http_https ]] || [[ $file_in_screen_1 =~ $regex_url_www ]]
-	then
-
-		#runs the app
-		bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		active_window_1=$(xdotool getactivewindow)
-		
-		xdotool windowmove --sync $active_window_1 0 0 &
-		
-		
-		#Writing the id to later kill it
-		echo "1:${active_window_1}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-
 }
 
 function right_screen() {
@@ -416,537 +200,58 @@ function right_screen() {
 	
 	sleep 3;
 	
-	#If matches a gif, jpg or jpeg open with viewnior
-	if [[ $file_in_screen_1 =~ $regex_image_nopng ]]
-	then
-
-		#runs the app
-		viewnior $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 1
-		active_window_2=$(xdotool getactivewindow)
-		
-		xdotool windowmove --sync $active_window_2 $(( ${width_1} + 1 )) 0;
-		#sleep 1
-		
-		xdotool getactivewindow key F11 
-		#Writing the id to later kill it
-		echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-	
-	#If matches a png open with gpicview
-	if [[ $file_in_screen_1 =~ $regex_image_png ]]
-	then
-
-		#runs the app
-		gpicview $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 1
-		active_window_2=$(xdotool getactivewindow)
-		
-		xdotool windowmove --sync $active_window_2 $(( ${width_1} + 1 )) 0;
-		#sleep 1
-		
-		xdotool getactivewindow key F11 
-		#Writing the id to later kill it
-		echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-		
-	#If it matches a video open with vlc
-	if	[[ $file_in_screen_1 =~ $regex_local_video ]]
-	then
-	
-		#runs the app
-		cvlc -A alsa,none --alsa-audio-device default --repeat $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 4
-		active_window_2=$(xdotool getactivewindow)
-		
-		xdotool windowmove --sync $active_window_2 $(( ${width_1} + 1)) 0
-		#Wait 1.5 seconds and then goes fullscreen
-		#sleep 1.5
-		xdotool mousemove --sync $(( ${width_1} + 100 )) 100
-		
-		#Goes fullscreen here
-		sleep 1.5
-		xdotool getactivewindow key f
-		
-		#Writing the id to later kill it
-		echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-		
-	#If it matches a youtube link, open and play in full screen
-	if [[ $file_in_screen_1 =~ $regex_youtube ]]
-	then
-
-		#Opening and moving chrome. Waiting 7 seconds and go fullscreen
-		bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-
-		check_if_new_app_opened;
-		
-		active_window_2=$(xdotool getactivewindow)
-		
-		sleep 15
-		
-		xdotool windowmove --sync $active_window_2 $(( ${width_1} + 10 )) 0;
-		
-		xdotool key --window $active_window_2 f 
-		
-		echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-		return
-	fi
-	
-	#If it matches a url open with chromium
-	if [[ $file_in_screen_1 =~ $regex_url_http_https ]] || [[ $file_in_screen_1 =~ $regex_url_www ]]
-	then
-		#runs the app
-		bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		active_window_2=$(xdotool getactivewindow)
-		
-		xdotool windowmove --sync $active_window_2 $(( ${width_1} + 10 )) 0 &
-
-		#Writing the id to later kill it
-		echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-	fi
+	#Sends info file to file opener
+	bash ~/TvPost/Bash_files/right_portion_file.sh ${file_in_screen_1};
+	return;
 
 }
 
 function right_screen_second_file() {
 	#Kill right acreen app
 	kill_app_right_corner
-	sleep 7;
-	#If matches an image open with image viewer
-	if [[ $file_in_screen_2 =~ $regex_image_nopng ]]; then
-		
-		
-		
-		#xdotool mousemove --sync $(( ${width_1} + 10 )) 0
-		#xdotool click 1
-		#runs the app
-		#Open with image viewer
-		viewnior $file_in_screen_2 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 4
-		active_window_2=$(xdotool getactivewindow)
-		xdotool windowmove --sync $active_window_2 $(( ${width_1} + 10 )) 0;
-		sleep 1
-		#xdotool getactivewindow key f
-		xdotool getactivewindow key F11 
-		echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-		
-	else
 	
-		if	[[ $file_in_screen_2 =~ $regex_local_video ]]; then
-			#xdotool mousemove --sync $(( ${width_1} + 10 )) 0
-			#xdotool click 1
-			#runs the app
-			vlc $file_in_screen_2 &
-			
-			#Check fore new apps
-			check_if_new_app_opened 
-			
-			#sleep 8
-			active_window_2=$(xdotool getactivewindow)
-			xdotool windowmove --sync $active_window_2 $(( ${width_1} + 50 )) 0;
-			#sleep 2
-			#xdotool getactivewindow key f &
-			sleep 1.5
-			xdotool mousemove --sync $(( ${width_1} + 100 )) 100
-			xdotool click 3
-			xdotool getactivewindow key v
-			xdotool getactivewindow key f
-			sleep 2
-			xdotool getactivewindow key f
-			#xdotool click 3
-			#xdotool getactivewindow key v
-			#xdotool getactivewindow key P
-			#xdotool getactivewindow key KP_Enter
-			#sleep 3;
-			#xdotool search --sync --onlyvisible --class "vlc" key F11;
-			echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-			
-		else
-			#If it matches a youtube link, open and play in full screen
-			if [[ $file_in_screen_2 =~ $regex_youtube ]]; then
-				#xdotool mousemove --sync $(( ${width_1} + 10 )) 0
-				#xdotool click 1
-				#runs the app
-				#Opening and moving firefox. Waiting 7 seconds and go fullscreen
-				bash ~/TvPost/Bash_files/chromeos-browser.bash &
-				#chromium &
-				sleep 5 &&
-				#xdotool key --window $active_window_1 ctrl+t 
-				chromium $file_in_screen_1 || chromium-browser $file_in_screen_1 &
-				#Check fore new apps
-				check_if_new_app_opened 
-				
-				#sleep 10
-				active_window_2=$(xdotool getactivewindow)
-				xdotool windowmove --sync $active_window_2 $(( ${width_1} + 10 )) 0;
-				#xdotool key --window $active_window_2 F11 
-				sleep 15
-				xdotool key --window $active_window_2 f 
-				echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-				
-			else
-				#If it matches a url open with firefox
-				if [[ $file_in_screen_2 =~ $regex_url_http_https ]] || [[ $file_in_screen_2 =~ $regex_url_www ]]; then
-					#xdotool mousemove --sync $(( ${width_1} + 10 )) 0
-					#xdotool click 1
-					#runs the app
-					#Opening and moving firefox
-					bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_2 &
-					
-					#Check fore new apps
-					check_if_new_app_opened 
-					
-					#sleep 10
-					active_window_2=$(xdotool getactivewindow)
-					xdotool windowmove --sync $active_window_2 $(( ${width_1} + 10 )) 0 &
-					sleep 8
-					xdotool key --window $active_window_2 F11 
-					#Writing the id to later kill it
-					echo "2:${active_window_2}-" >> ~/TvPost/Resolutions/window_id.txt
-					
-				else
-					echo "Archivo no reproducible"
-				fi
-			fi
-		
-		fi
-		
-	fi
+	sleep 3;
+	
+	#Sends info file to file opener
+	bash ~/TvPost/Bash_files/right_portion_file.sh ${file_in_screen_2};
+	return;
+
 }
 
 function bottom_screen() {
 	#Kill bottom app
 	kill_app_bottom_corner
 	
-	#If matches an image open with image viewer
-	if [[ $file_in_screen_1 =~ $regex_image_nopng ]]; then
-		#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-		#xdotool click 1
-		#runs the app
-		#Open with image viewer
-		viewnior $file_in_screen_1 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 4
-		active_window_3=$(xdotool getactivewindow)
-		xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-		sleep 1
-		#xdotool getactivewindow key f
-		xdotool getactivewindow key F11 
-		echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-		
-	else
+	sleep 3;
 	
-		if	[[ $file_in_screen_1 =~ $regex_local_video ]]; then
-			#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-			#xdotool click 1
-			#runs the app
-			vlc $file_in_screen_1 &
-			
-			#Check fore new apps
-			check_if_new_app_opened 
-			
-			#sleep 8
-			active_window_3=$(xdotool getactivewindow)
-			xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-			#sleep 2
-			#xdotool getactivewindow key f &
-			sleep 1.5
-			xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-			xdotool click 3
-			xdotool getactivewindow key v
-			xdotool getactivewindow key f
-			sleep 2
-			xdotool getactivewindow key f 
-			echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-			
-			#sleep 3;
-			#xdotool search --sync --onlyvisible --class "vlc" key F11;
-		else
-			#If it matches a youtube link, open and play in full screen
-			if [[ $file_in_screen_1 =~ $regex_youtube ]]; then
-				#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-				#xdotool click 1
-				#runs the app
-				#Opening and moving firefox. Waiting 7 seconds and go fullscreen
-				bash ~/TvPost/Bash_files/chromeos-browser.bash &
-				#chromium &
-				sleep 5 &&
-				#xdotool key --window $active_window_1 ctrl+t 
-				chromium $file_in_screen_1 || chromium-browser $file_in_screen_1 &
-				#Check fore new apps
-				check_if_new_app_opened 
-				
-				#sleep 10
-				active_window_3=$(xdotool getactivewindow)
-				xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-				#xdotool key --window $active_window_3 F11 
-				sleep 15
-				xdotool key --window $active_window_3 f 
-				#Writing the id to later kill it
-				echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-				
-			else
-				#If it matches a url open with firefox
-				if [[ $file_in_screen_1 =~ $regex_url_http_https ]] || [[ $file_in_screen_1 =~ $regex_url_www ]]; then
-					#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-					#xdotool click 1
-					#runs the app
-					#Opening and moving firefox
-					bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_1 &
-					
-					#Check fore new apps
-					check_if_new_app_opened 
-					
-					#sleep 10
-					active_window_3=$(xdotool getactivewindow)
-					xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 )) &
-					sleep 8
-					xdotool key --window $active_window_3 F11 
-					#Writing the id to later kill it
-					echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-					
-				else
-					echo "Archivo no reproducible"
-				fi
-			fi
+	#Sends info file to file opener
+	bash ~/TvPost/Bash_files/bottom_portion_file.sh ${file_in_screen_1};
+	return;
 		
-		fi
-		
-	fi
 }
 
 function bottom_screen_second_file() {
 	#Kill bottom app
 	kill_app_bottom_corner
 	
-	#If matches an image open with image viewer
-	if [[ $file_in_screen_2 =~ $regex_image_nopng ]]; then
-		#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-		#xdotool click 1
-		#runs the app
-		#Open with image viewer
-		viewnior $file_in_screen_2 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 4
-		active_window_3=$(xdotool getactivewindow)
-		xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-		sleep 1
-		#xdotool getactivewindow key f
-		xdotool getactivewindow key F11 
-		echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-		
-	else
+	sleep 3;
 	
-		if	[[ $file_in_screen_2 =~ $regex_local_video ]]; then
-			#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-			#xdotool click 1
-			#runs the app
-			vlc $file_in_screen_2 &
-			
-			#Check fore new apps
-			check_if_new_app_opened 
-			
-			#sleep 8
-			active_window_3=$(xdotool getactivewindow)
-			xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-			#sleep 2
-			#xdotool getactivewindow key f &
-			sleep 1.5
-			xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-			xdotool click 3
-			xdotool getactivewindow key v
-			xdotool getactivewindow key f
-			sleep 2
-			xdotool getactivewindow key f 
-			echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-			
-			#sleep 3;
-			#xdotool search --sync --onlyvisible --class "vlc" key F11;
-		else
-			#If it matches a youtube link, open and play in full screen
-			if [[ $file_in_screen_2 =~ $regex_youtube ]]; then
-				#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-				#xdotool click 1
-				#runs the app
-				#Opening and moving firefox. Waiting 7 seconds and go fullscreen
-				bash ~/TvPost/Bash_files/chromeos-browser.bash &
-				#chromium &
-				sleep 5 &&
-				#xdotool key --window $active_window_1 ctrl+t 
-				chromium $file_in_screen_1 || chromium-browser $file_in_screen_1 &
-				#Check fore new apps
-				check_if_new_app_opened 
-				
-				#sleep 10
-				active_window_3=$(xdotool getactivewindow)
-				xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-				#xdotool key --window $active_window_3 F11 
-				sleep 15
-				xdotool key --window $active_window_3 f 
-				#Writing the id to later kill it
-				echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-				
-			else
-				#If it matches a url open with firefox
-				if [[ $file_in_screen_2 =~ $regex_url_http_https ]] || [[ $file_in_screen_2 =~ $regex_url_www ]]; then
-					#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-					#xdotool click 1
-					#runs the app
-					#Opening and moving firefox
-					bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_2 &
-					
-					#Check fore new apps
-					check_if_new_app_opened 
-					
-					#sleep 10
-					active_window_3=$(xdotool getactivewindow)
-					xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 )) &
-					sleep 8
-					xdotool key --window $active_window_3 F11 
-					#Writing the id to later kill it
-					echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-					
-				else
-					echo "Archivo no reproducible"
-				fi
-			fi
-		
-		fi
-		
-	fi
+	#Sends info file to file opener
+	bash ~/TvPost/Bash_files/bottom_portion_file.sh ${file_in_screen_2};
+	return;
+	
 }
 
 function bottom_screen_third_file() {
 	#Kill bottom app
 	kill_app_bottom_corner
-	sleep 7;
-	#If matches an image open with image viewer
-	if [[ $file_in_screen_3 =~ $regex_image_nopng ]]; then
-		#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-		#xdotool click 1
-		#runs the app
-		#Open with image viewer
-		viewnior $file_in_screen_3 &
-		
-		#Check fore new apps
-		check_if_new_app_opened 
-		
-		#sleep 4
-		active_window_3=$(xdotool getactivewindow)
-		xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-		sleep 1
-		#xdotool getactivewindow key f
-		xdotool getactivewindow key F11 
-		echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-		
-	else
 	
-		if	[[ $file_in_screen_3 =~ $regex_local_video ]]; then
-			#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-			#xdotool click 1
-			#runs the app
-			vlc $file_in_screen_3 &
-			
-			#Check fore new apps
-			check_if_new_app_opened 
-			
-			#sleep 8
-			active_window_3=$(xdotool getactivewindow)
-			xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-			#sleep 2
-			#xdotool getactivewindow key f &
-			sleep 1.5
-			xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-			xdotool click 3
-			xdotool getactivewindow key v
-			xdotool getactivewindow key f
-			sleep 2
-			xdotool getactivewindow key f 
-			echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-			
-			#sleep 3;
-			#xdotool search --sync --onlyvisible --class "vlc" key F11;
-		else
-			#If it matches a youtube link, open and play in full screen
-			if [[ $file_in_screen_3 =~ $regex_youtube ]]; then
-				#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-				#xdotool click 1
-				#runs the app
-				#Opening and moving firefox. Waiting 7 seconds and go fullscreen
-				bash ~/TvPost/Bash_files/chromeos-browser.bash &
-				#chromium &
-				sleep 5 &&
-				#xdotool key --window $active_window_1 ctrl+t 
-				chromium $file_in_screen_1 || chromium-browser $file_in_screen_1 &
-				#Check fore new apps
-				check_if_new_app_opened 
-				
-				#sleep 10
-				active_window_3=$(xdotool getactivewindow)
-				xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 ))
-				#xdotool key --window $active_window_3 F11 
-				sleep 15
-				xdotool key --window $active_window_3 f 
-				#Writing the id to later kill it
-				echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-				
-			else
-				#If it matches a url open with firefox
-				if [[ $file_in_screen_3 =~ $regex_url_http_https ]] || [[ $file_in_screen_3 =~ $regex_url_www ]]; then
-					#xdotool mousemove --sync 0 $(( ${height_1} + 10 ))
-					#xdotool click 1
-					#runs the app
-					#Opening and moving firefox
-					bash ~/TvPost/Bash_files/chromeos-browser.bash $file_in_screen_3 &
-					
-					#Check fore new apps
-					check_if_new_app_opened 
-					
-					#sleep 10
-					active_window_3=$(xdotool getactivewindow)
-					xdotool windowmove --sync $active_window_3 0 $(( ${height_1} + 10 )) &
-					sleep 8
-					xdotool key --window $active_window_3 F11 
-					#Writing the id to later kill it
-					echo "3:${active_window_3}-" >> ~/TvPost/Resolutions/window_id.txt
-					
-				else
-					echo "Archivo no reproducible"
-				fi
-			fi
-		
-		fi
-		
-	fi
+	sleep 3;
+	
+	#Sends info file to file opener
+	bash ~/TvPost/Bash_files/bottom_portion_file.sh ${file_in_screen_3};
+	return;
+	
 }
 
 function change_left_and_right_screens() {
@@ -986,40 +291,72 @@ function change_left_right_and_bottom_screens() {
 #1 Screen
 if [ $select_screen == "1-1" ] 
 then
+
+	#minimize other apps
+	if [[ ! -z ${active_window_2} ]]
+	then
+		xdotool windowminimize ${active_window_2}
+	fi
+	
+	if [[ ! -z ${active_window_3} ]]
+	then
+		xdotool windowminimize ${active_window_3}
+	fi
+
+	echo "Cambiando pantalla 1"
+	left_screen
+
 	kill_app_right_corner;
 	sleep 1;
 	kill_app_bottom_corner;
 	sleep 1;
-	echo "Cambiando pantalla 1"
-	left_screen
+
 fi
 
 #2 screens - Changing file in the left screen
 if [ $select_screen == "2-1" ]
 then
-	kill_app_bottom_corner;
+	if [[ ! -z ${active_window_3} ]]
+	then
+		xdotool windowminimize ${active_window_3}
+	fi
+
 	sleep 1;
 	echo "Cambiando pantalla 2-1"
 	left_screen
+	
+	kill_app_bottom_corner;
 fi
 
 #2 screens - File in right screen
 if [ $select_screen == "2-2" ]
 then
-	kill_app_bottom_corner;
+	if [[ ! -z ${active_window_3} ]]
+	then
+		xdotool windowminimize ${active_window_3}
+	fi
+	
 	sleep 1;
 	echo "Cambiando pantalla 2-2"
 	right_screen
+	
+	kill_app_bottom_corner;
 fi
 
 #2 screens - changing both screens
 if [ $select_screen == "2-3" ]
 then
-	kill_app_bottom_corner;
+	if [[ ! -z ${active_window_3} ]]
+	then
+		xdotool windowminimize ${active_window_3}
+	fi
+	
 	sleep 1;
 	#Change both screens
 	echo "Cambiando pantalla 2-3"
 	change_left_and_right_screens
+	
+	kill_app_bottom_corner;
 
 fi
 
