@@ -215,30 +215,33 @@ def ModificarLayout(ArregloDatos):
     archivo1 = ArregloDatos[6]
     archivo2 = ArregloDatos[7]
     archivo3 = ArregloDatos[8]
-    
-    #Verifico si se necesita cambiar layout o no
-    CambioLayout(layout)
-    
+    porcionACambiar = ArregloDatos[2]
+    if (porcionACambiar == "null"):
+        #Preguntar que layout viene para mantener cierta porcion
+        #layout 100 mantiene archivo izquierda
+        #layout 2 mantiene izquierda y derecha
+        #layout 3 mantiene todo
+        if layout == "1":
+            porcionACambiar = "mantener1"
+        if layout == "2":
+            porcionACambiar = "mantener2"
+        if layout == "3":
+            porcionACambiar = "mantener3"
+    else:
+        #Verifico si se necesita cambiar layout o no
+        #solo cambia layout si no se desea mantener algo
+        #si se desea mantener, se cambio luego de manipular
+        #las apps en el bash opening_apps
+        CambioLayout(layout)
+        
     #Se escriben los datos del archivo de repŕoduccion atual
     CrearArchivoDatosReproduccion(ArregloDatos)
     
     try:
         
-        porcionACambiar = ArregloDatos[2]
+        
         listadoArchivosUtilizar = []
-        
-        if (porcionACambiar == "null"):
-            #Preguntar que layout viene para mantener cierta porcion
-            #layout 100 mantiene archivo izquierda
-            #layout 2 mantiene izquierda y derecha
-            #layout 3 mantiene todo
-            if layout == "1":
-                porcionACambiar = "mantener1"
-            if layout == "2":
-                porcionACambiar = "mantener2"
-            if layout == "3":
-                porcionACambiar = "mantener3"
-        
+
         if (porcionACambiar == "1-1"):
             listadoArchivosUtilizar.clear()
             listadoArchivosUtilizar.append(archivo1)

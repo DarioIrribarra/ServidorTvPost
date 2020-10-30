@@ -7,32 +7,35 @@ height_2=""
 width_3=""
 height_3=""
 
-regex='([0-9]):([0-9]+)x([0-9]+)'
-value=$( cat ~/TvPost/Resolutions/new_resolutions.txt )
+function widths_heights(){
+	regex='([0-9]):([0-9]+)x([0-9]+)'
+	value=$( cat ~/TvPost/Resolutions/new_resolutions.txt )
 
-#Get the number of lines to assign variables
-number_lines=$( wc -l < ~/TvPost/Resolutions/new_resolutions.txt)
+	#Get the number of lines to assign variables
+	number_lines=$( wc -l < ~/TvPost/Resolutions/new_resolutions.txt)
 
 
-while IFS= read -r line; do
-	[[ $line =~ $regex ]]
+	while IFS= read -r line; do
+		[[ $line =~ $regex ]]
 
-	if [ ${BASH_REMATCH[1]} == 1 ]; then
-		width_1=${BASH_REMATCH[2]}
-		height_1=${BASH_REMATCH[3]}
-	fi
-	
-	if [ ${BASH_REMATCH[1]} == 2 ]; then
-		width_2=${BASH_REMATCH[2]}
-		height_2=${BASH_REMATCH[3]}
-	fi
-	
-	if [ ${BASH_REMATCH[1]} == 3 ]; then
-		width_3=${BASH_REMATCH[2]}
-		height_3=${BASH_REMATCH[3]}
-	fi
-	
-done < <( cat ~/TvPost/Resolutions/new_resolutions.txt )
+		if [ ${BASH_REMATCH[1]} == 1 ]; then
+			width_1=${BASH_REMATCH[2]}
+			height_1=${BASH_REMATCH[3]}
+		fi
+		
+		if [ ${BASH_REMATCH[1]} == 2 ]; then
+			width_2=${BASH_REMATCH[2]}
+			height_2=${BASH_REMATCH[3]}
+		fi
+		
+		if [ ${BASH_REMATCH[1]} == 3 ]; then
+			width_3=${BASH_REMATCH[2]}
+			height_3=${BASH_REMATCH[3]}
+		fi
+		
+	done < <( cat ~/TvPost/Resolutions/new_resolutions.txt )
+	return
+}
 
 #Each file to reproduce in the screen will come with a number related to
 #the corresponding screen. the argument $1 contains the amount of screens
@@ -87,53 +90,11 @@ if [ -f ~/TvPost/Resolutions/window_id.txt ]; then
 		i=$(( i + 1 ))
 	done
 	
-	#active_window_1=${BASH_REMATCH[1]}
-	#active_window_2=${BASH_REMATCH[2]}
-	#active_window_3=${BASH_REMATCH[3]}
 	echo "active 1:"${active_window_1}
 	echo "active 2:"${active_window_2}
 	echo "active 3:"${active_window_3}
 fi
 
-
-
-
-#Url matcher
-regex_url_http_https='https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)'
-regex_url_www='[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)'
-
-#Online video matcher
-regex_youtube='https?://)?(www\.)?(m.youtube|youtube|youtu|youtube-nocookie)\.(com|be)/(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})'
-
-#Local video matcher
-regex_local_video='.*\/VideosPostTv\/.*'
-
-#Images will be stored in /home/pi/ImagenesPosTv. They will only be 
-#accepted if they come from there
-
-#image matcher
-#regex_image='\/home\/pi\/ImagenesPosTv\/.+\.(png|jpg|gif|bmp)'
-#regex_image='.*\/ImagenesPostTv\/.*'
-regex_image_nopng='.*\/ImagenesPostTv\/.+\.(jpg|gif|jpeg)'
-regex_image_png='.*\/ImagenesPostTv\/.+\.(png)'
-
-
-function check_if_new_app_opened() {
-	#echo "entreé" 
-	seconds=1;
-	#Get all the currently running apps
-	running_apps=$(wmctrl -l|echo $(awk '{print $1}'))
-	
-	while [ $seconds -le 300 ]; do
-		#Check if the new list is eqyal to the old list
-		if [ "${running_apps}" != "$(wmctrl -l|echo $(awk '{print $1}'))" ]; then
-			echo $(wmctrl -l|echo $(awk '{print $1}')) 
-			break;
-		fi
-		#sleep 0.5
-		seconds=$(( ${seconds} + 1 ))
-	done
-}
 
 function kill_app_left_corner() {
 		#Kill any app in that window
@@ -260,6 +221,7 @@ function change_left_and_right_screens() {
 	left_screen;
 	#Change right screen
 	right_screen_second_file;
+	return
 }
 
 function change_right_and_bottom() {
@@ -267,6 +229,7 @@ function change_right_and_bottom() {
 	right_screen;
 	#Change bottom screen
 	bottom_screen_second_file;
+	return
 }
 
 function change_left_and_bottom() {
@@ -275,6 +238,7 @@ function change_left_and_bottom() {
 	left_screen;
 	#Change bottom screen - 2nd argument
 	bottom_screen_second_file;
+	return
 }
 
 function change_left_right_and_bottom_screens() {
@@ -285,9 +249,10 @@ function change_left_right_and_bottom_screens() {
 	right_screen_second_file;
 	#Change bottom screen
 	bottom_screen_third_file;
+	return
 }
-#Validate that 'select_screen' is available in the resolutions
 
+#Validate that 'select_screen' is available in the resolutions
 #1 Screen
 if [ $select_screen == "1-1" ] 
 then
@@ -310,6 +275,7 @@ then
 	sleep 1;
 	kill_app_bottom_corner;
 	sleep 1;
+	return
 
 fi
 
@@ -326,6 +292,7 @@ then
 	left_screen
 	
 	kill_app_bottom_corner;
+	return
 fi
 
 #2 screens - File in right screen
@@ -341,6 +308,7 @@ then
 	right_screen
 	
 	kill_app_bottom_corner;
+	return
 fi
 
 #2 screens - changing both screens
@@ -354,9 +322,10 @@ then
 	sleep 1;
 	#Change both screens
 	echo "Cambiando pantalla 2-3"
-	change_left_and_right_screens
+	change_left_and_right_screens;
 	
 	kill_app_bottom_corner;
+	return
 
 fi
 
@@ -365,7 +334,8 @@ if [ $select_screen == "3-1" ]
 then
 	#Change the left screen
 	echo "Cambiando pantalla 3-1"
-	left_screen
+	left_screen;
+	return
 fi
 
 #3 screens changing right screen
@@ -373,7 +343,8 @@ if [ $select_screen == "3-2" ]
 then
 	#Change the right screen
 	echo "Cambiando pantalla 3-2"
-	right_screen
+	right_screen;
+	return
 fi
 
 #3 screens changing bottom screen
@@ -381,7 +352,8 @@ if [ $select_screen == "3-3" ]
 then
 	#Change the bottom screen
 	echo "Cambiando pantalla 3-3"
-	bottom_screen
+	bottom_screen;
+	return
 fi
 
 #3 screens changing 3 screens
@@ -390,6 +362,7 @@ then
 	#Change 3 screens
 	echo "Cambiando pantalla 3-4"
 	change_left_right_and_bottom_screens
+	return
 fi
 
 #3 screens changing left and right screens
@@ -399,6 +372,7 @@ then
 	#Change both screens
 	echo "Cambiando pantalla 3-5"
 	change_left_and_right_screens
+	return
 fi
 
 #3 screens changing right and left screens
@@ -408,6 +382,7 @@ then
 	#Change both screens
 	echo "Cambiando pantalla 3-6"
 	change_right_and_bottom
+	return
 
 fi
 
@@ -418,6 +393,7 @@ then
 	#both screens
 	echo "Cambiando pantalla 3-7"
 	change_left_and_bottom
+	return
 
 fi
 
@@ -428,6 +404,21 @@ fi
 #mantener3
 if [ $select_screen == "mantener1" ]
 then
+	#minimize other apps
+	if [[ ! -z ${active_window_2} ]]
+	then
+		xdotool windowminimize ${active_window_2}
+	fi
+	
+	if [[ ! -z ${active_window_3} ]]
+	then
+		xdotool windowminimize ${active_window_3}
+	fi
+	
+	#It changes format after manipulating opened apps
+	python3 /home/pi/TvPost/Py_files/Formato_100.py
+	
+	#kill other apps
 	kill_app_right_corner;
 	kill_app_bottom_corner;
 fi
@@ -435,42 +426,53 @@ fi
 if [ $select_screen == "mantener2" ]
 then
 
-	kill_app_bottom_corner;
+	#Minize other apps
+	if [[ ! -z ${active_window_3} ]]
+	then
+		xdotool windowminimize ${active_window_3}
+	fi
+	
+	#minimize other apps
+	if [[ ! -z ${active_window_2} ]]; then
+		xdotool windowminimize ${active_window_2}
+	fi 
+
+
+	#It changes format after manipulating opened apps
+	python3 /home/pi/TvPost/Py_files/Formato_50_50.py
+	
+	#recalculate size
+	widths_heights;
 
 	#Se debe  mover el archivo de la porción derecha a la derecha
 	if [[ ! -z ${active_window_2} ]]; then
-		echo "Ventana 2: ${active_window_2}"
-		xdotool windowactivate ${active_window_2} key F11
-		xdotool windowminimize ${active_window_2}
-		sleep 1;
-		xdotool windowmove ${active_window_2} $(( ${width_1} + 10 )) 0;
-		xdotool windowactivate ${active_window_2} key F11;
+		xdotool windowmove $active_window_2 $(( ${width_1} + 1 )) 0;
+		xdotool windowactivate $active_window_2
 	fi 
-
+	
+	#kill other apps
+	kill_app_bottom_corner;
 	
 fi
 
 if [ $select_screen == "mantener3" ]
 then
+
+	#minimize other apps
+	if [[ ! -z ${active_window_2} ]]; then
+		xdotool windowminimize ${active_window_2}
+	fi 
+
+	#It changes format after manipulating opened apps
+	python3 /home/pi/TvPost/Py_files/Formato_80_20_10.py
+
+	#recalculate size
+	widths_heights;
+
 	#Se debe  mover el archivo de la porción derecha a la derecha
 	if [[ ! -z ${active_window_2} ]]; then
-		xdotool windowactivate ${active_window_2} key F11
-		xdotool windowminimize ${active_window_2}
-		sleep 1;
-		xdotool windowmove ${active_window_2} $(( ${width_1} + 10 )) 0;
-		xdotool windowactivate ${active_window_2} key F11;
+		xdotool windowmove $active_window_2 $(( ${width_1} + 1 )) 0;
+		xdotool windowactivate $active_window_2
 	fi 
-	#Se debe  mover el archivo de la porción abajo al fondo
-	#if [[ ! -z ${active_window_3} ]]; then
-		#xdotool windowactivate ${active_window_3} key F11;
-		#sleep 1;
-		#xdotool windowmove ${active_window_3} 0 $(( ${height_1} + 10 ))
-		#xdotool windowactivate ${active_window_3} key F11;
-	#fi 
-fi
 
-#firefox -new-window www.google.cl & 
-#xdotool getactivewindow windowmove 1537 y
-#Move a an app wherever you want
-#This needs to give receive the width or height to work perfectly
-#xdotool search --sync --onlyvisible --class "Firefox" windowmove 1537 y
+fi
