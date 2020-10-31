@@ -1,3 +1,1 @@
-Screen 1:1088x691
-Screen 2:272x691
-Screen 3:1360x76
+Screen 1:1360x768

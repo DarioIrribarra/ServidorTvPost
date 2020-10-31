@@ -1,7 +1,7 @@
-layout,3
-tipoArchivo1,WebViewPropio
-tipoArchivo2,Image
+layout,1
+tipoArchivo1,Image
+tipoArchivo2,0
 tipoArchivo3,0
-archivo1,https://www.youtube.com/watch?v=7xO5XRv-hXw
-archivo2,/ImagenesPostTv/anillos.png
+archivo1,/ImagenesPostTv/3_media.jpg
+archivo2,0
 archivo3,0
