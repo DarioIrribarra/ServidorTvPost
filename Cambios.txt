@@ -22,3 +22,6 @@
 	ícono de cubo con flechas: permite agrandar la pantalla al máximo permitido en el équipo móvil.
 	ícono de engrane: permite acceder a las configuraciones de noVNC.
 	ícono de desconexión: permite salir de la sesión desconectando del equipo host
+
+*WebServer:
+	Para crear el webserver en un equipo nuevo, se debe ejecutar el bash "Create_new_WebServer.sh"
