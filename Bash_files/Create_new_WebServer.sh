@@ -14,6 +14,8 @@ echo "Apache instalado correctamente"
 echo "----------------------------------------"
 echo "Creando carpetas..."
 sudo cp -r ~/TvPost/WebServer/* /var/www/html/;
+sudo mkdir /var/www/html/ImagenesPostTv;
+sudo mkdir /var/www/html/VideosPostTv;
 echo "----------------------------------------"
 echo "Carpetas creadas correctamente"
 
@@ -31,3 +33,6 @@ echo "Instalando php..."
 sudo apt-get install php libapache2-mod-php -y;
 echo "----------------------------------------"
 echo "Php instalado correctamente"
+echo "----------------------------------------"
+echo "Instalación de WebServer TvPost finalizada correctamente"
+echo "----------------------------------------"
