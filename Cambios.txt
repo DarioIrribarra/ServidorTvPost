@@ -8,4 +8,17 @@
 	Bajar volumen 5%: click + movimiento hacia abajo
 	Silenciar/Activar sonido: click + movimiento hacia arriba y luego abajo
 	Pausar/Reproducir: click + movimiento hacia la izquierda y luego movimiento hacia la derecha
+
+*noVNC:
+	Al momento de clonar noVNC, se descarga sin websockify, por lo que se debe realizar el lanzamiento del script antes de que funcione. El script se encuentra en ~/TvPost/noVNC/utils/launch.sh. Una vez descargado websockify, se debe reiniciar el equipo.
 	
+	Luego de esto, al abrir en el dispositivo remoto, se debe configurar para que la resolución y compresión sean lo más bajo. Esta configuración se realiza en el equipo móvil al momento de abrir el control remoto, dando click en el ícono de engrane, y seleccionando la pestaña "Avanzado".
+	
+	Para manejar cómodamente desde noVNC, se deben utilizar los controles a su lado (ícono de flecha en el lado izquierdo), luego de conectar a la sesión actual.
+	ícono de mano: permite moverse a través de la pantalla.
+	ícono de cubo con flecha: permite escribir desde el dispositivo móvil para enviarlo a la pantalla.
+	ícono de cubo con "A": permite enviar instrucciónes de sistema operativo.
+	ícono de hoja con clip: permite revisar que se tiene en el "clipboard" y borrarlo.
+	ícono de cubo con flechas: permite agrandar la pantalla al máximo permitido en el équipo móvil.
+	ícono de engrane: permite acceder a las configuraciones de noVNC.
+	ícono de desconexión: permite salir de la sesión desconectando del equipo host

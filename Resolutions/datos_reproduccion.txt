@@ -1,7 +1,7 @@
-layout,1
-tipoArchivo1,Image
-tipoArchivo2,0
+layout,2
+tipoArchivo1,WebViewPropio
+tipoArchivo2,WebView
 tipoArchivo3,0
-archivo1,/ImagenesPostTv/drinks.png
-archivo2,0
+archivo1,https://google.cl
+archivo2,https://google.cl
 archivo3,0
