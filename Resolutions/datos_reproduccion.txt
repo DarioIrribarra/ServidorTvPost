@@ -2,6 +2,6 @@ layout,1
 tipoArchivo1,Image
 tipoArchivo2,0
 tipoArchivo3,0
-archivo1,/ImagenesPostTv/3_media.jpg
+archivo1,/ImagenesPostTv/drinks.png
 archivo2,0
 archivo3,0

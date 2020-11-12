@@ -92,7 +92,7 @@ if [ ${file_type} == "local_video" ]
 then
 
 	#runs the app
-	cvlc -A alsa,none --alsa-audio-device default --repeat $file_in_screen_1 &
+	vlc -A alsa,none --alsa-audio-device default --repeat $file_in_screen_1 &
 	
 	#Check fore new apps
 	nueva_id=$( bash ~/TvPost/Bash_files/check_new_app_opened.sh )

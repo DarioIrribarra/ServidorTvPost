@@ -1,0 +1,11 @@
+12-11-2020
+*Gestos VLC:
+	Desde el celular se puede controlar el reproductor VLC dando click al video y realizando el gesto correspondiente SIMULTÁNEAMENTE. 
+	*IMPORTANTE*: El gesto se eecuta luego de soltar el click
+	Los más importantes son:
+	
+	Subir volumen 5%: click + movimiento hacia arriba
+	Bajar volumen 5%: click + movimiento hacia abajo
+	Silenciar/Activar sonido: click + movimiento hacia arriba y luego abajo
+	Pausar/Reproducir: click + movimiento hacia la izquierda y luego movimiento hacia la derecha
+	

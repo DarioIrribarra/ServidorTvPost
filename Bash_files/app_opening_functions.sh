@@ -275,7 +275,7 @@ then
 	sleep 1;
 	kill_app_bottom_corner;
 	sleep 1;
-	return
+	exit
 
 fi
 
@@ -292,7 +292,7 @@ then
 	left_screen
 	
 	kill_app_bottom_corner;
-	return
+	exit
 fi
 
 #2 screens - File in right screen
@@ -308,7 +308,7 @@ then
 	right_screen
 	
 	kill_app_bottom_corner;
-	return
+	exit
 fi
 
 #2 screens - changing both screens
@@ -325,7 +325,7 @@ then
 	change_left_and_right_screens;
 	
 	kill_app_bottom_corner;
-	return
+	exit
 
 fi
 
@@ -335,7 +335,7 @@ then
 	#Change the left screen
 	echo "Cambiando pantalla 3-1"
 	left_screen;
-	return
+	exit
 fi
 
 #3 screens changing right screen
@@ -344,16 +344,26 @@ then
 	#Change the right screen
 	echo "Cambiando pantalla 3-2"
 	right_screen;
-	return
+	exit
 fi
 
 #3 screens changing bottom screen
 if [ $select_screen == "3-3" ]
 then
+
+	if [[ ! -z ${active_window_2} ]]
+	then
+		#recalculate size
+		widths_heights;
+		
+		xdotool windowmove $active_window_2 $(( ${width_1} + 10 )) 0;
+
+	fi
+
 	#Change the bottom screen
 	echo "Cambiando pantalla 3-3"
 	bottom_screen;
-	return
+	exit
 fi
 
 #3 screens changing 3 screens
@@ -362,7 +372,7 @@ then
 	#Change 3 screens
 	echo "Cambiando pantalla 3-4"
 	change_left_right_and_bottom_screens
-	return
+	exit
 fi
 
 #3 screens changing left and right screens
@@ -372,7 +382,7 @@ then
 	#Change both screens
 	echo "Cambiando pantalla 3-5"
 	change_left_and_right_screens
-	return
+	exit
 fi
 
 #3 screens changing right and left screens
@@ -382,7 +392,7 @@ then
 	#Change both screens
 	echo "Cambiando pantalla 3-6"
 	change_right_and_bottom
-	return
+	exit
 
 fi
 
@@ -393,7 +403,7 @@ then
 	#both screens
 	echo "Cambiando pantalla 3-7"
 	change_left_and_bottom
-	return
+	exit
 
 fi
 
